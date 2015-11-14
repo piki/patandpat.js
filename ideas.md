@@ -1,10 +1,5 @@
 ##Topics
 
-###Javascript Specific Concepts
-- setInterval()
-- setTimeout()
-
-
 ###General Concepts
 - Functions
   - Return values
@@ -16,6 +11,10 @@
 
 - Objects / Classes (not that js has any class(es))
   - Could be introduced with powerups?
+
+###Javascript Specific Concepts
+- setInterval()
+- setTimeout()
 
 ###Things that may be too advanced
 - Do we want to include ECMAScript 6 specific constructs like classes?
