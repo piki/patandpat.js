@@ -1,0 +1,11 @@
+#game-screen{
+  display: block;
+  margin: 0 auto;
+  width: 800px;
+  height:  450px;
+  margin-top: 200px;
+}
+
+body{
+  background: #000000;
+}
