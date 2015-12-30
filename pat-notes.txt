@@ -1,0 +1,15 @@
+- We should probally do a lesson on canvas drawing.
+  Topics:
+  - Sprites
+  - Background
+  - Asset loading
+  - Manipulation
+
+
+- Small concepts:
+  - null
+
+- Function reference:
+  Context:
+  - beginPath()
+  - closePath()
