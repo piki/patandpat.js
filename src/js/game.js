@@ -6,6 +6,7 @@ var OBSTACLE_LIST;
 var GAME_LOOP;
 var GAME_STATE;
 var CANVAS;
+var currentObstacle;
 
 
 /**** Settings ****/
@@ -108,6 +109,7 @@ function resetGame(){
   PLAYER = new Player();
   KEY_QUEUE = [];
   OBSTACLE_LIST = [];
+  currentObstacle = new Obstacle(200, 0, 30, 30);
   draw(CANVAS);
 }
 
@@ -211,12 +213,6 @@ function updateGame(canvas){
 }
 
 
-var currentObstacle = {
-  x:      200,
-  y:      0,
-  width:  30,
-  height: 30
-}
 
 function draw(canvas){
   var context = canvas.getContext("2d");
