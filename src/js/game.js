@@ -9,15 +9,22 @@ var gameLoopId;
 /**** Settings ****/
 var frameLength = 500;
 var canvasSize = {
-  w: 800,
-  h: 450
+  width: 800,
+  height: 450
 };
 var colors = {
-  screenBackground: "#FFFFFF"
+  screenBackground: "#FFFFFF",
+  player: "red"
 };
 
 
+/**** Resources ****/
+var images = {
+  playerStanding: { src: "images/player-standing.png"} 
+};
+
 /**** Classes ****/
+
 function GameState(){
   this.isLoss = false;
 }
@@ -25,6 +32,8 @@ function GameState(){
 function Player(){
   this.x = 0;
   this.y = 0;
+  this.width = 40;
+  this.height = 60;
 }
 
 function KeyQueue(){
@@ -37,23 +46,49 @@ function ObstacleList(){
   ];
 }
 
-function Obstacle(x, y, w, h){
+function Obstacle(x, y, width, height){
   this.x = x;
   this.y = y;
-  this.w = w;
-  this.h = h;
+  this.width = width;
+  this.height = height;
 }
 
 
+/**** Utility Functions ****/
+function loadImages(progress, finished) {
+  var loaded = 0
+  var imageCount = 0
+  for (var key in images) {
+    if (!images.hasOwnProperty(key)) continue;
+    imageCount++;
+    console.info("loading "+key);
+    images[key].data = new Image();
+    images[key].data.addEventListener("load", function() {
+      loaded++;
+      console.info("loaded "+key+" "+loaded+"/"+imageCount);
+      if (loaded == imageCount) {
+        if (finished != null) { finished() }
+      }
+      else {
+        if (progress != null) { progress(loaded * 1.0 / imageCount) }
+      }
+    })
+    images[key].data.src = images[key].src
+  }
+}
+
 /**** Control Functions ****/
-function initGame(){
+function loadGame(){
   gameState = new GameState();
   player = new Player();
   keyQueue = new KeyQueue();
   obstacleList = new ObstacleList();
   gameLoopId = window.setInterval(gameTick, frameLength);
+  loadImages(function(n) { console.info(n) }, startGame)
 }
 
+function startGame(){
+}
 
 /**** Game Loop Functions ****/
 function gameTick(){
@@ -72,10 +107,21 @@ function draw(){
   var canvas = document.getElementById("game-screen");
   var context = canvas.getContext("2d");
 
+  //draw background
   context.beginPath();
   context.fillStyle = colors.screenBackground;
   context.fillRect(0, 0, canvas.width, canvas.height);
-  // context.stroke;
+  context.closePath();
+
+  //draw player
+  context.beginPath();
+  context.drawImage(
+      images["playerStanding"].data,
+      player.x,
+      canvas.height - (player.y + player.height),
+      player.width,
+      player.height);
+  context.closePath();
 }
 
-initGame();
+loadGame();
