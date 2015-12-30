@@ -82,16 +82,19 @@ function loadImages(progress, finished) {
   }
 }
 
+function hitBoxesOverlapping(hitBox1, hitBox2) {
+  return (hitBox1.x < hitBox2.x + hitBox2.width &&
+          hitBox1.x + hitBox1.width > hitBox2.x &&
+          hitBox1.y < hitBox2.y + hitBox2.height &&
+          hitBox1.y + hitBox1.height > hitBox2.y)
+}
 
-/**** Control Functions ****/
+
+/**** Game Control Functions ****/
 function loadGame(){
-  GAME_STATE = "loaded";
-  PLAYER = new Player();
-  KEY_QUEUE = [];
-  OBSTACLE_LIST = [];
   window.addEventListener("keypress", keyPressed, false);
   CANVAS = document.getElementById("game-screen");
-  draw(CANVAS);
+  resetGame();
 }
 
 function startGame(){
@@ -100,6 +103,13 @@ function startGame(){
   GAME_LOOP = window.setInterval(gameTick, 1000/FPS);
 }
 
+function resetGame(){
+  GAME_STATE = "loaded";
+  PLAYER = new Player();
+  KEY_QUEUE = [];
+  OBSTACLE_LIST = [];
+  draw(CANVAS);
+}
 
 function pauseGame(){
   GAME_STATE = "paused";
@@ -108,6 +118,8 @@ function pauseGame(){
 
 function loseGame(){
   GAME_STATE = "lost";
+  window.clearInterval(GAME_LOOP);
+  draw(CANVAS);
   console.log("ending game...");
 }
 
@@ -122,6 +134,10 @@ function keyPressed(event){
   //If the game is loaded (but not started), start the game
   if(GAME_STATE == "loaded"){
     if(key == ' ')
+      startGame();
+  } else if(GAME_STATE == "lost"){
+    if(key == ' ')
+      resetGame();
       startGame();
   } else {
     KEY_QUEUE.push(key);
@@ -152,6 +168,24 @@ function handleKeys(){
 }
 
 function updateGame(canvas){
+
+  //See if the player is hitting the obstacle
+  var obstacleHitbox = {
+    x: currentObstacle.x - PLAYER.x + PLAYER.width - 3, 
+    y: currentObstacle.y,
+    width: currentObstacle.width,
+    height: currentObstacle.height
+  };
+
+  //don't update anything else, we're done
+  if(hitBoxesOverlapping(PLAYER, obstacleHitbox)){
+    console.log('LOST');
+    loseGame();
+    return;
+  }
+  
+
+
   //Update player's x  position based on FPS
   PLAYER.x += PLAYER_SPEED / FPS;
 
@@ -173,12 +207,15 @@ function updateGame(canvas){
   //Update Obstacle if it has gone off screen
   if(currentObstacle.x - PLAYER.x + 30  < 0)
     currentObstacle.x = PLAYER.x + canvas.width ; 
-  
+
 }
 
 
 var currentObstacle = {
-  x: 200
+  x:      200,
+  y:      0,
+  width:  30,
+  height: 30
 }
 
 function draw(canvas){
@@ -188,6 +225,20 @@ function draw(canvas){
   context.fillStyle = SCREEN_BACKGROUND;
   context.fillRect(0, 0, canvas.width, canvas.height);
   context.closePath();
+
+
+  if(GAME_STATE == "lost"){
+    var str = "GAME OVER";
+    context.font = "30px Arial";
+    context.fillStyle = "rgb(255,0,0)";
+    context.strokeStyle = "rgb(255,0,0)";
+    var dimensions = context.measureText(str);
+    context.fillText(
+        str, 
+        canvas.width/2 - dimensions.width/2, 
+        canvas.height/2);
+  }
+
 
   //draw player
   var playerImage;
@@ -205,17 +256,14 @@ function draw(canvas){
       PLAYER.height);
 
   //Draw Obstacles
-  var obstacleHeight = 30;
-  var obstacleWidth = 30;
   context.beginPath();
   context.fillStyle = OBSTACLE_COLOR;
   context.fillRect(
       currentObstacle.x - PLAYER.x, 
-      canvas.height - obstacleHeight, 
-      obstacleWidth, 
-      obstacleHeight);
+      canvas.height - currentObstacle.height - currentObstacle.y, 
+      currentObstacle.height, 
+      currentObstacle.width);
   context.closePath();
-
 }
 
 loadImages(function(n) { console.info(n) }, loadGame)
