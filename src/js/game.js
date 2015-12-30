@@ -9,9 +9,10 @@ var CANVAS;
 
 
 /**** Settings ****/
-var FPS = 10;
+var FPS = 15;
 var SCREEN_BACKGROUND = "#FFFFFF";
 var OBSTACLE_COLOR = "red";
+// How far the player should go in a second
 var PLAYER_SPEED = 60;
 var PLAYER_OFFSET = 80;
 var GRAVITY = 12 * 9.8;
@@ -155,10 +156,10 @@ function handleKeys(){
 }
 
 function updateGame(canvas){
-  //Update player's x coordinate
+  //Update player's x  position based on FPS
   PLAYER.x += PLAYER_SPEED / FPS;
 
-  //calculate the player's new movement
+  //calculate the player's new y position and velocity
   PLAYER.y += PLAYER.yVelocity / FPS;
   PLAYER.yVelocity -= GRAVITY / FPS;
   if (PLAYER.y <= 0) {
