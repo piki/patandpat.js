@@ -25,6 +25,7 @@ var IMAGES = {
   playerWalking4: { src: "images/player-walking-4.png"},
   playerWalking5: { src: "images/player-walking-5.png"},
   playerWalking6: { src: "images/player-walking-6.png"},
+  playerJumping:  { src: "images/player-jumping.png"},
 };
 var WALK_CYCLE = [
   IMAGES.playerWalking1,
@@ -43,7 +44,7 @@ function GameState(){
 
 function Player(){
   this.x = 0;
-  this.y = 0;
+  this.y = 1;
   this.width = 20;
   this.height = 30;
   this.walkFrame = 0;
@@ -124,6 +125,7 @@ function handleKeys(){
 function updateGame(){
   //update player
   PLAYER.x += DEFAULT_MOVEMENT.playerPerSecond;
+
   if(PLAYER.walkFrame < WALK_CYCLE.length - 1)
     PLAYER.walkFrame++;
   else
@@ -142,9 +144,15 @@ function draw(){
   context.closePath();
 
   //draw player
+  var playerImage;
+  //if the player is not on the ground, use the jumping image
+  if(PLAYER.y > 0)
+    playerImage = IMAGES.playerJumping.data;
+  else
+    playerImage = WALK_CYCLE[PLAYER.walkFrame].data
   //player is always drawn in the center of the screen horizontally
   context.drawImage(
-      WALK_CYCLE[PLAYER.walkFrame].data,
+      playerImage,
       canvas.width/3,
       canvas.height - (PLAYER.y + PLAYER.height),
       PLAYER.width,
