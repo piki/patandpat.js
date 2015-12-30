@@ -42,10 +42,6 @@ var WALK_CYCLE = [
 
 
 /**** Classes ****/
-function GameState(){
-  this.isLoss = false;
-}
-
 function Player(){
   this.x = 0;
   this.y = 0;
