@@ -223,18 +223,6 @@ function draw(canvas){
   context.closePath();
 
 
-  if(GAME_STATE == "lost"){
-    var str = "GAME OVER";
-    context.font = "30px Arial";
-    context.fillStyle = "rgb(255,0,0)";
-    context.strokeStyle = "rgb(255,0,0)";
-    var dimensions = context.measureText(str);
-    context.fillText(
-        str, 
-        canvas.width/2 - dimensions.width/2, 
-        canvas.height/2);
-  }
-
 
   //draw player
   var playerImage;
@@ -260,6 +248,23 @@ function draw(canvas){
       currentObstacle.height, 
       currentObstacle.width);
   context.closePath();
+
+
+
+  //check to see if the game has been lost
+  if(GAME_STATE == "lost"){
+    context.beginPath();
+    var str = "GAME OVER";
+    context.font = "30px Arial";
+    context.fillStyle = "rgb(255,0,0)";
+    context.strokeStyle = "rgb(255,0,0)";
+    var dimensions = context.measureText(str);
+    context.fillText(
+        str, 
+        canvas.width/2 - dimensions.width/2, 
+        canvas.height/2);
+    context.endPath();
+  }
 }
 
 loadImages(function(n) { console.info(n) }, loadGame)
