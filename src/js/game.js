@@ -9,7 +9,9 @@ var GAME_LOOP;
 /**** Settings ****/
 var FPS = 10;
 var SCREEN_BACKGROUND = "#FFFFFF";
-var DEFAULT_MOVEMENT = 10;
+var OBSTACLE_COLOR = "red";
+var DEFAULT_MOVEMENT = 5;
+var PLAYER_OFFSET = 80;
 
 
 /**** Resources ****/
@@ -40,7 +42,7 @@ function GameState(){
 
 function Player(){
   this.x = 0;
-  this.y = 1;
+  this.y = 0;
   this.width = 20;
   this.height = 30;
   this.walkFrame = 0;
@@ -119,18 +121,24 @@ function handleKeys(){
 }
 
 function updateGame(){
-  //update player
-  PLAYER.x += DEFAULT_MOVEMENT.playerPerSecond;
+  //Update player
+  PLAYER.x += DEFAULT_MOVEMENT;
 
-  
-
+  //Select what walking frame we are on
+  //Loop back to the start if we're at the end
   if(PLAYER.walkFrame < WALK_CYCLE.length - 1)
     PLAYER.walkFrame++;
   else
     PLAYER.walkFrame = 0;
   
+
+  
 }
 
+
+var currentObstacle = {
+  x: 200
+}
 function draw(){
   var canvas = document.getElementById("game-screen");
   var context = canvas.getContext("2d");
@@ -151,10 +159,23 @@ function draw(){
   //player is always drawn in the center of the screen horizontally
   context.drawImage(
       playerImage,
-      canvas.width/3,
+      PLAYER_OFFSET,
       canvas.height - (PLAYER.y + PLAYER.height),
       PLAYER.width,
       PLAYER.height);
+
+  //Draw Obstacles
+  var obstacleHeight = 30;
+  var obstacleWidth = 30;
+  context.beginPath();
+  context.fillStyle = OBSTACLE_COLOR;
+  context.fillRect(
+      currentObstacle.x - PLAYER.x, 
+      canvas.height - obstacleHeight, 
+      obstacleWidth, 
+      obstacleHeight);
+  context.closePath();
+
 }
 
 loadGame();
