@@ -9,10 +9,10 @@ var CANVAS;
 
 
 /**** Settings ****/
-var FPS = 30;
+var FPS = 10;
 var SCREEN_BACKGROUND = "#FFFFFF";
 var OBSTACLE_COLOR = "red";
-var DEFAULT_MOVEMENT = 5;
+var PLAYER_SPEED = 60;
 var PLAYER_OFFSET = 80;
 var GRAVITY = 12 * 9.8;
 var PLAYER_JUMP = 100;
@@ -155,9 +155,10 @@ function handleKeys(){
 }
 
 function updateGame(canvas){
-  //Update player
-  PLAYER.x += DEFAULT_MOVEMENT;
+  //Update player's x coordinate
+  PLAYER.x += PLAYER_SPEED / FPS;
 
+  //calculate the player's new movement
   PLAYER.y += PLAYER.yVelocity / FPS;
   PLAYER.yVelocity -= GRAVITY / FPS;
   if (PLAYER.y <= 0) {
