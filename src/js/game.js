@@ -23,8 +23,8 @@ var images = {
   playerStanding: { src: "images/player-standing.png"} 
 };
 
-/**** Classes ****/
 
+/**** Classes ****/
 function GameState(){
   this.isLoss = false;
 }
@@ -77,21 +77,29 @@ function loadImages(progress, finished) {
   }
 }
 
+
 /**** Control Functions ****/
 function loadGame(){
   gameState = new GameState();
   player = new Player();
   keyQueue = new KeyQueue();
   obstacleList = new ObstacleList();
-  gameLoopId = window.setInterval(gameTick, frameLength);
   loadImages(function(n) { console.info(n) }, startGame)
 }
 
 function startGame(){
+  console.log("starting game...");
+  gameLoopId = window.setInterval(gameTick, frameLength);
 }
+
+function endGame(){
+  console.log("ending game...");
+}
+
 
 /**** Game Loop Functions ****/
 function gameTick(){
+  console.log("game tick...");
   handleKeys();
   updateState();
   draw();
@@ -114,14 +122,12 @@ function draw(){
   context.closePath();
 
   //draw player
-  context.beginPath();
   context.drawImage(
       images["playerStanding"].data,
       player.x,
       canvas.height - (player.y + player.height),
       player.width,
       player.height);
-  context.closePath();
 }
 
 loadGame();
