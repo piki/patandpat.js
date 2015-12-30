@@ -173,7 +173,7 @@ function updateGame(canvas){
 
   //See if the player is hitting the obstacle
   obstacleHitbox = {
-    x: currentObstacle.x - PLAYER_OFFSET - 1,
+    x: currentObstacle.x - PLAYER_OFFSET,
     y: currentObstacle.y,
     width: currentObstacle.width,
     height: currentObstacle.height
