@@ -8,12 +8,8 @@ var GAME_LOOP;
 
 /**** Settings ****/
 var FPS = 10;
-var COLORS = {
-  screenBackground: "#FFFFFF",
-  player: "red"
-};
+var SCREEN_BACKGROUND = "#FFFFFF";
 var DEFAULT_MOVEMENT = 10;
-
 
 
 /**** Resources ****/
@@ -126,6 +122,8 @@ function updateGame(){
   //update player
   PLAYER.x += DEFAULT_MOVEMENT.playerPerSecond;
 
+  
+
   if(PLAYER.walkFrame < WALK_CYCLE.length - 1)
     PLAYER.walkFrame++;
   else
@@ -139,7 +137,7 @@ function draw(){
 
   //draw background
   context.beginPath();
-  context.fillStyle = COLORS.screenBackground;
+  context.fillStyle = SCREEN_BACKGROUND;
   context.fillRect(0, 0, canvas.width, canvas.height);
   context.closePath();
 
