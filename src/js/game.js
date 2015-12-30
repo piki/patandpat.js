@@ -4,6 +4,8 @@ var GAME_STATE;
 var KEY_QUEUE;
 var OBSTACLE_LIST;
 var GAME_LOOP;
+var GAME_STATE;
+var CANVAS;
 
 
 /**** Settings ****/
@@ -12,8 +14,9 @@ var SCREEN_BACKGROUND = "#FFFFFF";
 var OBSTACLE_COLOR = "red";
 var DEFAULT_MOVEMENT = 5;
 var PLAYER_OFFSET = 80;
-var GRAVITY = 3 * 9.8;
-var PLAYER_JUMP = 30;
+var GRAVITY = 12 * 9.8;
+var PLAYER_JUMP = 100;
+var JUMP_MOD = 3.0;
 
 
 /**** Resources ****/
@@ -51,16 +54,6 @@ function Player(){
   this.walkFrame = 0;
 }
 
-function KeyQueue(){
-  this.queue = [];
-}
-
-function ObstacleList(){
-  this.list = [
-    new Obstacle(50, 0, 5, 5)
-  ];
-}
-
 function Obstacle(x, y, width, height){
   this.x = x;
   this.y = y;
@@ -95,45 +88,81 @@ function loadImages(progress, finished) {
 
 /**** Control Functions ****/
 function loadGame(){
-  GAME_STATE = new GameState();
+  GAME_STATE = "loaded";
   PLAYER = new Player();
-  KEY_QUEUE = new KeyQueue();
-  OBSTACLE_LIST = new ObstacleList();
-  loadImages(function(n) { console.info(n) }, startGame)
+  KEY_QUEUE = [];
+  OBSTACLE_LIST = [];
+  window.addEventListener("keypress", keyPressed, false);
+  CANVAS = document.getElementById("game-screen");
+  draw(CANVAS);
 }
 
 function startGame(){
+  GAME_STATE = "started";
   console.log("starting game...");
   GAME_LOOP = window.setInterval(gameTick, 1000/FPS);
 }
 
-function endGame(){
+
+function pauseGame(){
+  GAME_STATE = "paused";
+  console.log("game paused");
+}
+
+function loseGame(){
+  GAME_STATE = "lost";
   console.log("ending game...");
 }
 
 
+
+/**** Event Functions ****/
+
+function keyPressed(event){
+  //get the key that was pressed
+  var key = String.fromCharCode(event.keyCode || event.charCode);
+
+  //If the game is loaded (but not started), start the game
+  if(GAME_STATE == "loaded"){
+    if(key == ' ')
+      startGame();
+  } else {
+    KEY_QUEUE.push(key);
+  }
+}
+
+function spacePressed(){
+  if(PLAYER.y == 0)
+    PLAYER.yVelocity = PLAYER_JUMP;
+
+}
+
 /**** Game Loop Functions ****/
 function gameTick(){
   console.log("game tick...");
-  var canvas = document.getElementById("game-screen");
   handleKeys();
-  updateGame(canvas);
-  draw(canvas);
+  updateGame(CANVAS);
+  draw(CANVAS);
 }
 
 function handleKeys(){
- 
+  //while there are keys in the queue
+  while(KEY_QUEUE.length > 0){
+    var key = KEY_QUEUE.shift();
+    if(key == ' ')
+      spacePressed();
+  }
 }
 
 function updateGame(canvas){
   //Update player
   PLAYER.x += DEFAULT_MOVEMENT;
 
-  PLAYER.y += 3.0 * PLAYER.yVelocity / FPS;
+  PLAYER.y += PLAYER.yVelocity / FPS;
   PLAYER.yVelocity -= GRAVITY / FPS;
   if (PLAYER.y <= 0) {
     PLAYER.y = 0;
-    PLAYER.yVelocity = PLAYER_JUMP;
+    PLAYER.yVelocity = 0;
   }
 
   //Select what walking frame we are on
@@ -191,4 +220,4 @@ function draw(canvas){
 
 }
 
-loadGame();
+loadImages(function(n) { console.info(n) }, loadGame)
