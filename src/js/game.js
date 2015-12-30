@@ -1,27 +1,39 @@
 /**** Globals ****/
-var player;
-var gameState;
-var keyQueue;
-var obstacleList;
-var gameLoopId;
+var PLAYER;
+var GAME_STATE;
+var KEY_QUEUE;
+var OBSTACLE_LIST;
+var GAME_LOOP;
 
 
 /**** Settings ****/
-var frameLength = 500;
-var canvasSize = {
-  width: 800,
-  height: 450
-};
-var colors = {
+var FPS = 10;
+var COLORS = {
   screenBackground: "#FFFFFF",
   player: "red"
 };
+var DEFAULT_MOVEMENT = 10;
+
 
 
 /**** Resources ****/
-var images = {
-  playerStanding: { src: "images/player-standing.png"} 
+var IMAGES = {
+  playerStanding: { src: "images/player-standing.png"},
+  playerWalking1: { src: "images/player-walking-1.png"},
+  playerWalking2: { src: "images/player-walking-2.png"},
+  playerWalking3: { src: "images/player-walking-3.png"},
+  playerWalking4: { src: "images/player-walking-4.png"},
+  playerWalking5: { src: "images/player-walking-5.png"},
+  playerWalking6: { src: "images/player-walking-6.png"},
 };
+var WALK_CYCLE = [
+  IMAGES.playerWalking1,
+  IMAGES.playerWalking2,
+  IMAGES.playerWalking3,
+  IMAGES.playerWalking4,
+  IMAGES.playerWalking5,
+  IMAGES.playerWalking6
+];
 
 
 /**** Classes ****/
@@ -32,8 +44,9 @@ function GameState(){
 function Player(){
   this.x = 0;
   this.y = 0;
-  this.width = 40;
-  this.height = 60;
+  this.width = 20;
+  this.height = 30;
+  this.walkFrame = 0;
 }
 
 function KeyQueue(){
@@ -58,12 +71,12 @@ function Obstacle(x, y, width, height){
 function loadImages(progress, finished) {
   var loaded = 0
   var imageCount = 0
-  for (var key in images) {
-    if (!images.hasOwnProperty(key)) continue;
+  for (var key in IMAGES) {
+    if (!IMAGES.hasOwnProperty(key)) continue;
     imageCount++;
     console.info("loading "+key);
-    images[key].data = new Image();
-    images[key].data.addEventListener("load", function() {
+    IMAGES[key].data = new Image();
+    IMAGES[key].data.addEventListener("load", function() {
       loaded++;
       console.info("loaded "+key+" "+loaded+"/"+imageCount);
       if (loaded == imageCount) {
@@ -73,23 +86,23 @@ function loadImages(progress, finished) {
         if (progress != null) { progress(loaded * 1.0 / imageCount) }
       }
     })
-    images[key].data.src = images[key].src
+    IMAGES[key].data.src = IMAGES[key].src
   }
 }
 
 
 /**** Control Functions ****/
 function loadGame(){
-  gameState = new GameState();
-  player = new Player();
-  keyQueue = new KeyQueue();
-  obstacleList = new ObstacleList();
+  GAME_STATE = new GameState();
+  PLAYER = new Player();
+  KEY_QUEUE = new KeyQueue();
+  OBSTACLE_LIST = new ObstacleList();
   loadImages(function(n) { console.info(n) }, startGame)
 }
 
 function startGame(){
   console.log("starting game...");
-  gameLoopId = window.setInterval(gameTick, frameLength);
+  GAME_LOOP = window.setInterval(gameTick, 1000/FPS);
 }
 
 function endGame(){
@@ -101,14 +114,21 @@ function endGame(){
 function gameTick(){
   console.log("game tick...");
   handleKeys();
-  updateState();
+  updateGame();
   draw();
 }
 
 function handleKeys(){
 }
 
-function updateState(){
+function updateGame(){
+  //update player
+  PLAYER.x += DEFAULT_MOVEMENT.playerPerSecond;
+  if(PLAYER.walkFrame < WALK_CYCLE.length - 1)
+    PLAYER.walkFrame++;
+  else
+    PLAYER.walkFrame = 0;
+  
 }
 
 function draw(){
@@ -117,17 +137,18 @@ function draw(){
 
   //draw background
   context.beginPath();
-  context.fillStyle = colors.screenBackground;
+  context.fillStyle = COLORS.screenBackground;
   context.fillRect(0, 0, canvas.width, canvas.height);
   context.closePath();
 
   //draw player
+  //player is always drawn in the center of the screen horizontally
   context.drawImage(
-      images["playerStanding"].data,
-      player.x,
-      canvas.height - (player.y + player.height),
-      player.width,
-      player.height);
+      WALK_CYCLE[PLAYER.walkFrame].data,
+      canvas.width/3,
+      canvas.height - (PLAYER.y + PLAYER.height),
+      PLAYER.width,
+      PLAYER.height);
 }
 
 loadGame();
