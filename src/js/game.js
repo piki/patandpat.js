@@ -5,8 +5,16 @@ var keyQueue;
 var obstacleList;
 var gameLoopId;
 
+
 /**** Settings ****/
 var frameLength = 500;
+var canvasSize = {
+  w: 800,
+  h: 450
+};
+var colors = {
+  screenBackground: "#FFFFFF"
+};
 
 
 /**** Classes ****/
@@ -61,8 +69,13 @@ function updateState(){
 }
 
 function draw(){
+  var canvas = document.getElementById("game-screen");
+  var context = canvas.getContext("2d");
+
+  context.beginPath();
+  context.fillStyle = colors.screenBackground;
+  context.fillRect(0, 0, canvas.width, canvas.height);
+  // context.stroke;
 }
 
-
-
-
+initGame();
