@@ -10,8 +10,10 @@ var GAME_LOOP;
 var FPS = 10;
 var SCREEN_BACKGROUND = "#FFFFFF";
 var OBSTACLE_COLOR = "red";
-var DEFAULT_MOVEMENT = 5;
+var DEFAULT_MOVEMENT = 10;
 var PLAYER_OFFSET = 80;
+var SCREEN_WIDTH = 800;
+var SCREEN_HEIGHT = 450;
 
 
 /**** Resources ****/
@@ -112,15 +114,16 @@ function endGame(){
 /**** Game Loop Functions ****/
 function gameTick(){
   console.log("game tick...");
+  var canvas = document.getElementById("game-screen");
   handleKeys();
-  updateGame();
-  draw();
+  updateGame(canvas);
+  draw(canvas);
 }
 
 function handleKeys(){
 }
 
-function updateGame(){
+function updateGame(canvas){
   //Update player
   PLAYER.x += DEFAULT_MOVEMENT;
 
@@ -131,6 +134,12 @@ function updateGame(){
   else
     PLAYER.walkFrame = 0;
   
+  //Update Obstacle
+  if(currentObstacle.x - PLAYER.x + 30  < 0){
+    console.log("obstacle despawn");
+    currentObstacle.x = PLAYER.x + canvas.width ; 
+  }
+
 
   
 }
@@ -139,10 +148,9 @@ function updateGame(){
 var currentObstacle = {
   x: 200
 }
-function draw(){
-  var canvas = document.getElementById("game-screen");
-  var context = canvas.getContext("2d");
 
+function draw(canvas){
+  var context = canvas.getContext("2d");
   //draw background
   context.beginPath();
   context.fillStyle = SCREEN_BACKGROUND;
