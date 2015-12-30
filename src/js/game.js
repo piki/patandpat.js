@@ -172,8 +172,8 @@ function handleKeys(){
 function updateGame(canvas){
 
   //See if the player is hitting the obstacle
-  var obstacleHitbox = {
-    x: currentObstacle.x - PLAYER.x + PLAYER.width - 3, 
+  obstacleHitbox = {
+    x: currentObstacle.x - PLAYER_OFFSET - 1,
     y: currentObstacle.y,
     width: currentObstacle.width,
     height: currentObstacle.height
@@ -263,7 +263,7 @@ function draw(canvas){
         str, 
         canvas.width/2 - dimensions.width/2, 
         canvas.height/2);
-    context.endPath();
+    context.closePath();
   }
 }
 
