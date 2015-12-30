@@ -7,13 +7,13 @@ var GAME_LOOP;
 
 
 /**** Settings ****/
-var FPS = 10;
+var FPS = 30;
 var SCREEN_BACKGROUND = "#FFFFFF";
 var OBSTACLE_COLOR = "red";
-var DEFAULT_MOVEMENT = 10;
+var DEFAULT_MOVEMENT = 5;
 var PLAYER_OFFSET = 80;
-var SCREEN_WIDTH = 800;
-var SCREEN_HEIGHT = 450;
+var GRAVITY = 3 * 9.8;
+var PLAYER_JUMP = 30;
 
 
 /**** Resources ****/
@@ -45,6 +45,7 @@ function GameState(){
 function Player(){
   this.x = 0;
   this.y = 0;
+  this.yVelocity = 0;
   this.width = 20;
   this.height = 30;
   this.walkFrame = 0;
@@ -121,11 +122,19 @@ function gameTick(){
 }
 
 function handleKeys(){
+ 
 }
 
 function updateGame(canvas){
   //Update player
   PLAYER.x += DEFAULT_MOVEMENT;
+
+  PLAYER.y += 3.0 * PLAYER.yVelocity / FPS;
+  PLAYER.yVelocity -= GRAVITY / FPS;
+  if (PLAYER.y <= 0) {
+    PLAYER.y = 0;
+    PLAYER.yVelocity = PLAYER_JUMP;
+  }
 
   //Select what walking frame we are on
   //Loop back to the start if we're at the end
@@ -133,14 +142,10 @@ function updateGame(canvas){
     PLAYER.walkFrame++;
   else
     PLAYER.walkFrame = 0;
-  
-  //Update Obstacle
-  if(currentObstacle.x - PLAYER.x + 30  < 0){
-    console.log("obstacle despawn");
+
+  //Update Obstacle if it has gone off screen
+  if(currentObstacle.x - PLAYER.x + 30  < 0)
     currentObstacle.x = PLAYER.x + canvas.width ; 
-  }
-
-
   
 }
 
