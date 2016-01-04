@@ -53,6 +53,11 @@ function calls -- binding a key to a "player.shoot" function -- and for
 removing destroyed obstacles from game state.
 
 
+## Parallax
+
+We will add backgrounds, first one layer, then two.
+
+
 ## Sound effects
 
 We'll use audio clips or record audio using a web-based sound editor
