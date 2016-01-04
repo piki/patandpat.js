@@ -14,7 +14,7 @@ function draw(canvas){
   if(PLAYER.y > 0)
     playerImage = IMAGES.playerJumping.data;
   else
-    playerImage = WALK_CYCLE[PLAYER.walkFrame].data
+    playerImage = WALK_CYCLE[Math.floor(PLAYER.walkFrame / FRAMES_PER_SPRITE)].data
   //player is always drawn in the center of the screen horizontally
   context.drawImage(
       playerImage,

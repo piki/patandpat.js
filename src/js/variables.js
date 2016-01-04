@@ -10,7 +10,8 @@ var currentObstacle;
 
 
 /**** Settings ****/
-var FPS = 15;
+var FPS = 60;
+var FRAMES_PER_SPRITE = 4;
 var SCREEN_BACKGROUND = "#FFFFFF";
 var OBSTACLE_COLOR = "red";
 // How far the player should go in a second
