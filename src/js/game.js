@@ -7,12 +7,15 @@ function loadGame(){
 }
 
 function startGame(){
+  if(GAME_STATE == "running")
+    return;
   GAME_STATE = "running"
   GAME_LOOP = window.setInterval(gameTick, 1000/FPS)
   console.log("game started")
 }
 
 function resetGame(){
+  window.clearInterval(GAME_LOOP)
   GAME_STATE = "loaded"
   PLAYER = new Player()
   KEY_QUEUE = []
@@ -22,6 +25,8 @@ function resetGame(){
 }
 
 function pauseGame(){
+  if(GAME_STATE == "paused")
+    return;
   GAME_STATE = "paused"
   window.clearInterval(GAME_LOOP)
   console.log("game paused")
@@ -35,7 +40,8 @@ function togglePause(){
 }
 
 function unpauseGame(){
-  startGame()
+  if(GAME_STATE == "paused")
+    startGame()
 }
 
 function loseGame(){
