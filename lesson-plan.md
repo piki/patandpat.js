@@ -18,6 +18,13 @@ it to simulate gravity (parabolas!) and to allow a longer key press to
 result in a higher jump.
 
 
+## Score keeping and text painting
+
+We'll keep score, by counting time, distance, or the number of obstacles
+jumped.  We'll introduce text-painting by having students display the
+score on the screen.
+
+
 ## Sprites and random numbers
 
 We'll teach students how to change the player character's appearance.
@@ -28,13 +35,6 @@ sprites to obstacles.
 
 Time permitting, we can change sprites based on the game heartbeat, to
 animate both the player character (running) and the obstacles.
-
-
-## Score keeping and text painting
-
-We'll keep score, by counting time, distance, or the number of obstacles
-jumped.  We'll introduce text-painting by having students display the
-score on the screen.
 
 
 ## Persistence, arrays, and sorting
