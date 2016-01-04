@@ -3,8 +3,8 @@ function Player(){
   this.x = 0;
   this.y = 0;
   this.yVelocity = 0;
-  this.width = 20;
-  this.height = 30;
+  this.width = 56;
+  this.height = 100;
   this.walkFrame = 0;
 }
 

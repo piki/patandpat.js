@@ -25,8 +25,8 @@ function loadImages(progress, finished) {
 function fixCanvas(){
   CANVAS.width=400;
   CANVAS.height=225;
-  CANVAS.style.width = 800;
-  CANVAS.style.height = 450;
+  CANVAS.style.width = "400px";
+  CANVAS.style.height = "225px";
 }
 
 function hitBoxesOverlapping(hitBox1, hitBox2) {

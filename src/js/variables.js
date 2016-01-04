@@ -15,10 +15,10 @@ var FRAMES_PER_SPRITE = 4;
 var SCREEN_BACKGROUND = "#FFFFFF";
 var OBSTACLE_COLOR = "red";
 // How far the player should go in a second
-var PLAYER_SPEED = 60;
+var PLAYER_SPEED = 120;
 var PLAYER_OFFSET = 80;
-var GRAVITY = 12 * 9.8;
-var PLAYER_JUMP = 100;
+var GRAVITY = 35 * 9.8;
+var PLAYER_JUMP = 280;
 var JUMP_MOD = 3.0;
 
 
