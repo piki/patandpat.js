@@ -1,6 +1,7 @@
 function spaceKeyPressed(){
-  jump();
+  jump()
 }
 
 function pKeyPressed(){
+  togglePaused()
 }
