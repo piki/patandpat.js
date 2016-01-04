@@ -9,8 +9,15 @@ function handleKeys(){
   //while there are keys in the queue
   while(KEY_QUEUE.length > 0){
     var key = KEY_QUEUE.shift()
-    if(key == ' ')
+    if(key == ' '){
       spaceKeyPressed()
+    }
+    if(key == 'p'){
+      pKeyPressed()
+    }
+    if(key == 'r'){
+      rKeyPressed()
+    }
   }
 }
 

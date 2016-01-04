@@ -7,9 +7,9 @@ function loadGame(){
 }
 
 function startGame(){
-  GAME_STATE = "started"
-  console.log("starting game")
+  GAME_STATE = "running"
   GAME_LOOP = window.setInterval(gameTick, 1000/FPS)
+  console.log("game started")
 }
 
 function resetGame(){
@@ -30,12 +30,17 @@ function pauseGame(){
 function togglePause(){
   if(GAME_STATE == "paused")
     startGame()
-  else if(GAME_STATE == "started")
+  else if(GAME_STATE == "running")
     pauseGame()
+}
+
+function unpauseGame(){
+  startGame()
 }
 
 function loseGame(){
   GAME_STATE = "lost"
+  //Stop the game loop
   window.clearInterval(GAME_LOOP)
   draw(CANVAS)
   console.log("ending game")

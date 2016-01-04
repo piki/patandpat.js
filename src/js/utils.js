@@ -43,21 +43,22 @@ function keyPressed(event){
   var key = String.fromCharCode(event.keyCode || event.charCode)
 
   //If the game is loaded (but not started), start the game
-  if(GAME_STATE == "loaded"){
-    if(key == ' ')
-      startGame()
-    if(key == 'p')
-      pauseGame()
-  } else if(GAME_STATE == "lost"){
-    if(key == ' '){
-      resetGame()
-      startGame()
-    }
-  } else if(GAME_STATE == "paused"){
-    if(key == 'p')
-      startGame()
-  } else {
+  if(GAME_STATE == "running"){
     KEY_QUEUE.push(key)
+  } else {
+    if(key == ' '){
+      spaceKeyPressed()
+    }
+    //Here we use keycode for the enter key
+    if(event.keyCode == 13){
+      enterKeyPressed()
+    }
+    if(key == 'p'){
+      pKeyPressed()
+    }
+    if(key == 'r'){
+      rKeyPressed()
+    }
   }
 }
 
