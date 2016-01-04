@@ -3,13 +3,13 @@ function loadImages(progress, finished) {
   var loaded = 0
   var imageCount = 0
   for (var key in IMAGES) {
-    if (!IMAGES.hasOwnProperty(key)) continue;
-    imageCount++;
-    console.info("loading "+key);
-    IMAGES[key].data = new Image();
+    if (!IMAGES.hasOwnProperty(key)) continue
+    imageCount++
+    console.info("loading "+key)
+    IMAGES[key].data = new Image()
     IMAGES[key].data.addEventListener("load", function() {
-      loaded++;
-      console.info("loaded "+key+" "+loaded+"/"+imageCount);
+      loaded++
+      console.info("loaded "+key+" "+loaded+"/"+imageCount)
       if (loaded == imageCount) {
         if (finished != null) { finished() }
       }
@@ -23,10 +23,10 @@ function loadImages(progress, finished) {
 
 //make the canvas at half resolution
 function fixCanvas(){
-  CANVAS.width=400;
-  CANVAS.height=225;
-  CANVAS.style.width = "400px";
-  CANVAS.style.height = "225px";
+  CANVAS.width=400
+  CANVAS.height=225
+  CANVAS.style.width = "400px"
+  CANVAS.style.height = "225px"
 }
 
 function hitBoxesOverlapping(hitBox1, hitBox2) {
@@ -40,24 +40,24 @@ function hitBoxesOverlapping(hitBox1, hitBox2) {
 
 function keyPressed(event){
   //get the key that was pressed
-  var key = String.fromCharCode(event.keyCode || event.charCode);
+  var key = String.fromCharCode(event.keyCode || event.charCode)
 
   //If the game is loaded (but not started), start the game
   if(GAME_STATE == "loaded"){
     if(key == ' ')
-      startGame();
+      startGame()
     if(key == 'p')
-      pauseGame();
+      pauseGame()
   } else if(GAME_STATE == "lost"){
     if(key == ' '){
-      resetGame();
-      startGame();
+      resetGame()
+      startGame()
     }
   } else if(GAME_STATE == "paused"){
     if(key == 'p')
-      startGame();
+      startGame()
   } else {
-    KEY_QUEUE.push(key);
+    KEY_QUEUE.push(key)
   }
 }
 
@@ -65,5 +65,5 @@ function keyPressed(event){
 
 function jump(){
   if(PLAYER.y == 0)
-    PLAYER.yVelocity = PLAYER_JUMP;
+    PLAYER.yVelocity = PLAYER_JUMP
 }

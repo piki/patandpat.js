@@ -1,25 +1,25 @@
 /**** Globals ****/
-var PLAYER;
-var GAME_STATE;
-var KEY_QUEUE;
-var OBSTACLE_LIST;
-var GAME_LOOP;
-var GAME_STATE;
-var CANVAS;
-var currentObstacle;
+var PLAYER
+var GAME_STATE
+var KEY_QUEUE
+var OBSTACLE_LIST
+var GAME_LOOP
+var GAME_STATE
+var CANVAS
+var currentObstacle
 
 
 /**** Settings ****/
-var FPS = 60;
-var FRAMES_PER_SPRITE = 4;
-var SCREEN_BACKGROUND = "#FFFFFF";
-var OBSTACLE_COLOR = "red";
+var FPS = 60
+var FRAMES_PER_SPRITE = 4
+var SCREEN_BACKGROUND = "#FFFFFF"
+var OBSTACLE_COLOR = "red"
 // How far the player should go in a second
-var PLAYER_SPEED = 120;
-var PLAYER_OFFSET = 80;
-var GRAVITY = 35 * 9.8;
-var PLAYER_JUMP = 280;
-var JUMP_MOD = 3.0;
+var PLAYER_SPEED = 120
+var PLAYER_OFFSET = 80
+var GRAVITY = 35 * 9.8
+var PLAYER_JUMP = 280
+var JUMP_MOD = 3.0
 
 
 /**** Resources ****/
@@ -32,7 +32,7 @@ var IMAGES = {
   playerWalking5: { src: "images/player-walking-5.png"},
   playerWalking6: { src: "images/player-walking-6.png"},
   playerJumping:  { src: "images/player-jumping.png"},
-};
+}
 var WALK_CYCLE = [
   IMAGES.playerWalking1,
   IMAGES.playerWalking2,
@@ -40,4 +40,4 @@ var WALK_CYCLE = [
   IMAGES.playerWalking4,
   IMAGES.playerWalking5,
   IMAGES.playerWalking6
-];
+]

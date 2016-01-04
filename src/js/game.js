@@ -31,7 +31,7 @@ function togglePause(){
   if(GAME_STATE == "paused")
     startGame()
   else if(GAME_STATE == "started")
-    pauseGame();
+    pauseGame()
 }
 
 function loseGame(){
