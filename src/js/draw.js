@@ -38,7 +38,7 @@ function draw(canvas){
   //check to see if the game has been lost
   if(GAME_STATE == "lost"){
     context.beginPath()
-    var str = "GAME OVER"
+    var str = "GAME OVER, Press R"
     context.font = "30px Arial"
     context.fillStyle = "rgb(255,0,0)"
     context.strokeStyle = "rgb(255,0,0)"
@@ -53,7 +53,7 @@ function draw(canvas){
   //check to see if the game has been loaded
   if(GAME_STATE == "loaded"){
     context.beginPath()
-    var str = "Press Spacebar To Start"
+    var str = "Press Enter To Start"
     context.font = "20px Lucida Console"
     context.fillStyle = "#2f2f2f"
     context.strokeStyle = "rgb(255,0,0)"
