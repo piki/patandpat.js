@@ -14,15 +14,14 @@ function handleKeys(){
   }
 }
 
-function updateGame(canvas){
+var obstacleHitbox = { x:0, y:0, width:0, height:0 };
 
+function updateGame(canvas){
   //See if the player is hitting the obstacle
-  obstacleHitbox = {
-    x: currentObstacle.x - PLAYER_OFFSET,
-    y: currentObstacle.y,
-    width: currentObstacle.width,
-    height: currentObstacle.height
-  };
+  obstacleHitbox.x = currentObstacle.x - PLAYER_OFFSET
+  obstacleHitbox.y = currentObstacle.y
+  obstacleHitbox.width = currentObstacle.width
+  obstacleHitbox.height = currentObstacle.height
 
   //don't update anything else, we're done
   if(hitBoxesOverlapping(PLAYER, obstacleHitbox)){
