@@ -18,6 +18,9 @@ function handleKeys(){
     if(key == 'r'){
       rKeyPressed()
     }
+    if(key == '\r'){
+      enterKeyPressed()
+    }
   }
 }
 
