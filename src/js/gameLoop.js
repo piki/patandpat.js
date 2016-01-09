@@ -33,10 +33,10 @@ function updateGame(canvas){
   obstacleHitbox.width = currentObstacle.width
   obstacleHitbox.height = currentObstacle.height
 
-  //don't update anything else, we're done
   if(hitBoxesOverlapping(PLAYER, obstacleHitbox)){
     console.log('player hit box')
     loseGame()
+    //don't update anything else, we're done
     return
   }
 
