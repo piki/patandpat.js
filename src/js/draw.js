@@ -54,7 +54,7 @@ function draw(canvas){
   if(GAME_STATE == "loaded"){
     context.beginPath()
     var str = "Press Enter To Start"
-    context.font = "20px Lucida Console"
+    context.font = "20px Arial"
     context.fillStyle = "#2f2f2f"
     context.strokeStyle = "rgb(255,0,0)"
     var dimensions = context.measureText(str)
