@@ -5,6 +5,7 @@ var KEY_QUEUE
 var GAME_LOOP
 var GAME_STATE
 var CANVAS
+var VIEWPORT_X
 var currentObstacle
 
 

@@ -1,6 +1,6 @@
 /**** Classes ****/
 function Player(){
-  this.x = 0
+  this.x = PLAYER_OFFSET
   this.y = 0
   this.yVelocity = 0
   this.width = 56

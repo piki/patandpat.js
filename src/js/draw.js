@@ -18,7 +18,7 @@ function draw(canvas){
   //player is always drawn in the center of the screen horizontally
   context.drawImage(
       playerImage,
-      PLAYER_OFFSET,
+      PLAYER.x - VIEWPORT_X,
       canvas.height - (PLAYER.y + PLAYER.height),
       PLAYER.width,
       PLAYER.height)
@@ -27,7 +27,7 @@ function draw(canvas){
   context.beginPath()
   context.fillStyle = OBSTACLE_COLOR
   context.fillRect(
-      currentObstacle.x - PLAYER.x, 
+      currentObstacle.x - VIEWPORT_X,
       canvas.height - currentObstacle.height - currentObstacle.y, 
       currentObstacle.width, 
       currentObstacle.height)

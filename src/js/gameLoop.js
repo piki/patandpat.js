@@ -24,16 +24,9 @@ function handleKeys(){
   }
 }
 
-var obstacleHitbox = { x:0, y:0, width:0, height:0 }
-
 function updateGame(canvas){
   //See if the player is hitting the obstacle
-  obstacleHitbox.x = currentObstacle.x - PLAYER_OFFSET
-  obstacleHitbox.y = currentObstacle.y
-  obstacleHitbox.width = currentObstacle.width
-  obstacleHitbox.height = currentObstacle.height
-
-  if(hitBoxesOverlapping(PLAYER, obstacleHitbox)){
+  if(hitBoxesOverlapping(PLAYER, currentObstacle)){
     console.log('player hit box')
     loseGame()
     //don't update anything else, we're done
@@ -42,6 +35,7 @@ function updateGame(canvas){
 
   //Update player's x  position based on FPS
   PLAYER.x += PLAYER_SPEED / FPS
+  VIEWPORT_X += PLAYER_SPEED / FPS
 
   //calculate the player's new y position and velocity
   PLAYER.y += PLAYER.yVelocity / FPS
@@ -59,7 +53,7 @@ function updateGame(canvas){
     PLAYER.walkFrame = 0
 
   //Update Obstacle if it has gone off screen
-  if(currentObstacle.x - PLAYER.x + 30  < 0)
+  if(currentObstacle.x + currentObstacle.width < VIEWPORT_X)
     currentObstacle.x = PLAYER.x + canvas.width
 
 }
