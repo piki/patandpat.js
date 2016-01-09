@@ -7,6 +7,7 @@ var GAME_STATE
 var CANVAS
 var VIEWPORT_X
 var currentObstacle
+var currentCoin
 
 
 /**** Settings ****/
@@ -32,6 +33,7 @@ var IMAGES = {
   playerWalking5: { src: "images/player-walking-5.png"},
   playerWalking6: { src: "images/player-walking-6.png"},
   playerJumping:  { src: "images/player-jumping.png"},
+  coin:           { src: "images/coin.png"},
 }
 var WALK_CYCLE = [
   IMAGES.playerWalking1,
