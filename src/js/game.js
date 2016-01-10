@@ -18,9 +18,9 @@ function startGame(){
 function resetGame(){
   window.clearInterval(GAME_LOOP)
   GAME_STATE = "loaded"
+  SCORE = 0
   PLAYER = new Player()
   KEY_QUEUE = []
-  SCORE = 0
   VIEWPORT_X = 0
   currentObstacle = new Obstacle(400, 0, 30, 60)
   draw(CANVAS)
