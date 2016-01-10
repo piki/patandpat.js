@@ -20,6 +20,7 @@ function resetGame(){
   GAME_STATE = "loaded"
   PLAYER = new Player()
   KEY_QUEUE = []
+  SCORE = 0
   VIEWPORT_X = 0
   currentObstacle = new Obstacle(400, 0, 30, 60)
   draw(CANVAS)

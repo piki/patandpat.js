@@ -33,6 +33,9 @@ function updateGame(canvas){
     return
   }
 
+  //See if the player is jumping over an obstacle
+  if(passedOver(PLAYER, currentObstacle)){
+  }
   //Update player's x  position based on FPS
   PLAYER.x += PLAYER_SPEED / FPS
   VIEWPORT_X += PLAYER_SPEED / FPS
