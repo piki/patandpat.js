@@ -35,7 +35,16 @@ function updateGame(canvas){
 
   //See if the player is jumping over an obstacle
   if(passedOver(PLAYER, currentObstacle)){
+    SCORE = SCORE + 1
   }
+
+  //See if the player is getting a coin
+  if(hitBoxesOverlapping(PLAYER, currentCoin)){
+    SCORE += 1
+    //make another coin
+    makeNewCoin(canvas)
+  }
+
   //Update player's x  position based on FPS
   PLAYER.x += PLAYER_SPEED / FPS
   VIEWPORT_X += PLAYER_SPEED / FPS
@@ -59,5 +68,8 @@ function updateGame(canvas){
   if(currentObstacle.x + currentObstacle.width < VIEWPORT_X)
     currentObstacle.x = PLAYER.x + canvas.width
 
-}
+  //Update Coin if it has gone off screen
+  if(currentCoin.x + currentCoin.width < VIEWPORT_X)
+    makeNewCoin(canvas)
 
+}
