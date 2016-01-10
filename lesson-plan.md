@@ -33,6 +33,7 @@ Intro quiz:
     input, update state, draw)
   - what two windows do we have open to program JavaScript? (editor and
     browser)
+  ==> https://create.kahoot.it/#user/5657ed8b-2f92-407e-8942-cc4c06d1bd6f/kahoots/created
 
 Do some text painting:
   - Give the game a name, in the `draw` function in `draw.js`
