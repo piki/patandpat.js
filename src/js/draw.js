@@ -18,7 +18,7 @@ function draw(canvas){
   //player is always drawn in the center of the screen horizontally
   context.drawImage(
       playerImage,
-      PLAYER_OFFSET,
+      PLAYER.x - VIEWPORT_X,
       canvas.height - (PLAYER.y + PLAYER.height),
       PLAYER.width,
       PLAYER.height)
@@ -27,42 +27,24 @@ function draw(canvas){
   context.beginPath()
   context.fillStyle = OBSTACLE_COLOR
   context.fillRect(
-      currentObstacle.x - PLAYER.x, 
+      currentObstacle.x - VIEWPORT_X,
       canvas.height - currentObstacle.height - currentObstacle.y, 
       currentObstacle.width, 
       currentObstacle.height)
   context.closePath()
 
-
-
-  //check to see if the game has been lost
+  //what to say when we just lost
   if(GAME_STATE == "lost"){
-    context.beginPath()
-    var str = "GAME OVER, Press R"
     context.font = "30px Arial"
-    context.fillStyle = "rgb(255,0,0)"
-    context.strokeStyle = "rgb(255,0,0)"
-    var dimensions = context.measureText(str)
-    context.fillText(
-        str, 
-        canvas.width/2 - dimensions.width/2, 
-        canvas.height/2)
-    context.closePath()
+    context.fillStyle = "red"
+    context.fillText("GAME OVER, Press R", 47, 112)
   }
-  
-  //check to see if the game has been loaded
+
+  //what to say when the game has just been loaded
   if(GAME_STATE == "loaded"){
-    context.beginPath()
-    var str = "Press Enter To Start"
     context.font = "20px Arial"
-    context.fillStyle = "#2f2f2f"
-    context.strokeStyle = "rgb(255,0,0)"
-    var dimensions = context.measureText(str)
-    context.fillText(
-        str, 
-        canvas.width/2 - dimensions.width/2, 
-        canvas.height/2)
-    context.closePath()
+    context.fillStyle = "dimgray"
+    context.fillText("Press Enter to Start", 109, 112)
   }
 }
 

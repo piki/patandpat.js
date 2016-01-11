@@ -18,11 +18,55 @@ it to simulate gravity (parabolas!) and to allow a longer key press to
 result in a higher jump.
 
 
-## Score keeping and text painting
+## Score keeping: variables, game state, if, and text painting
 
-We'll keep score, by counting time, distance, or the number of obstacles
-jumped.  We'll introduce text-painting by having students display the
-score on the screen.
+We'll keep score, by counting the number of obstacles jumped.  We'll
+introduce text-painting by having students display the score on the
+screen.
+
+Intro quiz:
+  - who was the first computer programmer? (Ada Lovelace)
+  - what kind of game are we building? (endless runner)
+  - what programming idea did we learn last week? (functions)
+  - what does text after two // slashes do? (nothing)
+  - what are the main things that happen in each frame or tick? (handle
+    input, update state, draw)
+  - what two windows do we have open to program JavaScript? (editor and
+    browser)
+  ==> https://create.kahoot.it/#user/5657ed8b-2f92-407e-8942-cc4c06d1bd6f/kahoots/created
+
+Do some text painting:
+  - Give the game a name, in the `draw` function in `draw.js`
+    - Let the kids pick their name, text size, text color
+    - They'll have to get the coordinates right by hand
+      - Introduce coordinates.  Many of them will have seen this before.
+
+Introduce variables, especially `GAME_STATE` == { loaded, running, paused, lost }
+
+Introduce `if`
+  Add `GAME_STATE == "paused"` text to `draw`.
+
+Introduce SCORE
+  - set to zero in `resetGame` (`game.js`)
+  - they need to increment it in `updateGame` (`gameLoop.js`)
+
+Add text for the score in `draw`
+Which game states should it be visible?
+Introduce `if ... ||`
+
+
+Time permitting:
+
+1. adding a `HIGH_SCORE` variable (quick)
+    * adding a global `HIGH_SCORE` and setting it to zero
+    * updating it if `SCORE` is higher when a game ends
+    * displaying it in the loaded state
+
+2. adding coins (longer)
+    * draw the image in `draw`
+    * create a `new Obstacle` for it in `resetGame` (copypasta)
+    * increment score if `hitBoxesOverlapping`, in `updateGame` (copypasta)
+    * update when it goes off the screen, in `updateGame` (copypasta)
 
 
 ## Sprites and random numbers

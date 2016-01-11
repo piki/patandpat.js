@@ -36,6 +36,19 @@ function hitBoxesOverlapping(hitBox1, hitBox2) {
           hitBox1.y + hitBox1.height > hitBox2.y)
 }
 
+function passedOver(hitBox1, hitBox2) {
+  var box2right = hitBox2.x + hitBox2.width
+  if (hitBox1.x < box2right && hitBox1.x + PLAYER_SPEED/FPS >= box2right)
+    return true
+  else
+    return false
+}
+
+function makeNewCoin(canvas){
+  currentCoin.x = PLAYER.x + canvas.width * (1+Math.random())
+  currentCoin.y = 75 + 75 * Math.random()
+}
+
 /**** Event Functions ****/
 
 function keyPressed(event){
