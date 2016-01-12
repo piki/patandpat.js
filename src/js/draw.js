@@ -33,6 +33,14 @@ function draw(canvas){
       currentObstacle.height)
   context.closePath()
 
+  //Draw coins
+  context.drawImage(
+      IMAGES.coin.data,
+      currentCoin.x - PLAYER.x + PLAYER_OFFSET,
+      canvas.height - currentCoin.height - currentCoin.y, 
+      currentCoin.width,
+      currentCoin.height)
+
   //what to say when we just lost
   if(GAME_STATE == "lost"){
     context.font = "30px Arial"
@@ -40,11 +48,30 @@ function draw(canvas){
     context.fillText("GAME OVER, Press R", 47, 112)
   }
 
+  //what to say when the game is paused
+  if(GAME_STATE == "paused"){
+    context.font = "30px Arial"
+    context.fillStyle = "green"
+    context.fillText("Push P to resume", 80, 30)
+  }
+
   //what to say when the game has just been loaded
   if(GAME_STATE == "loaded"){
     context.font = "20px Arial"
     context.fillStyle = "dimgray"
     context.fillText("Press Enter to Start", 109, 112)
+    context.fillText("High score: " + HIGH_SCORE, 137, 78)
+
+    context.font = "32px Arial"
+    context.fillStyle = "red"
+    context.fillText("JUMP, RABBIT!", 82, 50)
+  }
+
+  //draw the score if the game is running
+  if(GAME_STATE == "running" || GAME_STATE == "paused" || GAME_STATE == "lost"){
+    context.font = "30px Courier"
+    context.fillStyle = "black"
+    context.fillText(SCORE, 8, 30)
   }
 }
 
