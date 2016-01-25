@@ -81,3 +81,19 @@ function jump(){
   if(PLAYER.y == 0)
     PLAYER.yVelocity = PLAYER_JUMP
 }
+ 
+var REVERSE_NUMERICAL = function(a, b) { return b - a }
+
+function loadScores(){
+  var str = localStorage.getItem("HIGH_SCORES")
+  if (str) {
+    HIGH_SCORES = JSON.parse(str)
+  }
+  else {
+    HIGH_SCORES = new Array()
+  }
+}
+
+function saveScores(){
+  localStorage.setItem("HIGH_SCORES", JSON.stringify(HIGH_SCORES))
+}
