@@ -69,6 +69,14 @@ Time permitting:
     * update when it goes off the screen, in `updateGame` (copypasta)
 
 
+## Persistence, arrays, and sorting
+
+We'll build a top-ten list for high scores.  Each time they end a game,
+they will add the score to the array, sort it, and drop the 11th element
+(if any).  Time permitting, we'll persist the top ten list as a JSON
+string in a cookie.
+
+
 ## Sprites and random numbers
 
 We'll teach students how to change the player character's appearance.
@@ -79,14 +87,6 @@ sprites to obstacles.
 
 Time permitting, we can change sprites based on the game heartbeat, to
 animate both the player character (running) and the obstacles.
-
-
-## Persistence, arrays, and sorting
-
-We'll build a top-ten list for high scores.  Each time they end a game,
-they will add the score to the array, sort it, and drop the 11th element
-(if any).  Time permitting, we'll persist the top ten list as a JSON
-string in a cookie.
 
 
 ## Destructible scenery
