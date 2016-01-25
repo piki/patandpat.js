@@ -51,8 +51,11 @@ function draw(canvas){
   if(GAME_STATE == "loaded"){
     context.font = "20px Arial"
     context.fillStyle = "dimgray"
-    context.fillText("Press Enter to Start", 109, 112)
-    context.fillText("High score: " + HIGH_SCORE, 137, 78)
+    context.fillText("Press Enter to Start", 109, 92)
+    context.fillText("High scores:", 272, 120)
+    for (var i=0; i<HIGH_SCORES.length; i++) {
+      context.fillText(HIGH_SCORES[i], 317, 140+20*i)
+    }
 
     context.font = "32px Arial"
     context.fillStyle = "red"

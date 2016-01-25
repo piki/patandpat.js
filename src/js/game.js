@@ -3,6 +3,7 @@ function loadGame(){
   window.addEventListener("keypress", keyPressed, false)
   CANVAS = document.getElementById("game-screen")
   fixCanvas()
+  HIGH_SCORES = new Array()
   resetGame()
 }
 
@@ -53,8 +54,10 @@ function loseGame(){
   draw(CANVAS)
   console.log("ending game")
 
-  if (SCORE > HIGH_SCORE) {
-    HIGH_SCORE = SCORE
+  HIGH_SCORES.push(SCORE)
+  HIGH_SCORES.sort(REVERSE_NUMERICAL)
+  if (HIGH_SCORES.length > 5) {
+    HIGH_SCORES.pop()
   }
 }
 
