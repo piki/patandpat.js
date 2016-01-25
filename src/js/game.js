@@ -23,7 +23,6 @@ function resetGame(){
   KEY_QUEUE = []
   VIEWPORT_X = 0
   currentObstacle = new Obstacle(400, 0, 30, 60)
-  currentCoin = new Obstacle(600, 150, 30, 30)
   draw(CANVAS)
 }
 

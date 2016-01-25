@@ -33,14 +33,6 @@ function draw(canvas){
       currentObstacle.height)
   context.closePath()
 
-  //Draw coins
-  context.drawImage(
-      IMAGES.coin.data,
-      currentCoin.x - PLAYER.x + PLAYER_OFFSET,
-      canvas.height - currentCoin.height - currentCoin.y, 
-      currentCoin.width,
-      currentCoin.height)
-
   //what to say when we just lost
   if(GAME_STATE == "lost"){
     context.font = "30px Arial"
