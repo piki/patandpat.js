@@ -72,9 +72,12 @@ Time permitting:
 ## Persistence, arrays, and sorting
 
 We'll build a top-ten list for high scores.  Each time they end a game,
-they will add the score to the array, sort it, and drop the 11th element
-(if any).  Time permitting, we'll persist the top ten list as a JSON
-string in a cookie.
+they will add the score to the array, sort it, and drop the final element.
+
+We'll use a for loop to draw the high scores on the start screen.
+
+Time permitting, we'll persist the top ten list as a JSON string using
+localStorage.
 
 
 ## Sprites and random numbers
