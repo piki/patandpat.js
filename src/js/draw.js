@@ -52,21 +52,6 @@ function draw(canvas){
     context.font = "20px Arial"
     context.fillStyle = "dimgray"
     context.fillText("Press Enter to Start", 109, 92)
-    context.fillText("High scores:", 272, 120)
-    for (var i=0; i<HIGH_SCORES.length; i++) {
-      context.fillText(HIGH_SCORES[i], 317, 140+20*i)
-    }
-
-    context.font = "32px Arial"
-    context.fillStyle = "red"
-    context.fillText("JUMP, RABBIT!", 82, 50)
-  }
-
-  //draw the score if the game is running
-  if(GAME_STATE == "running" || GAME_STATE == "paused" || GAME_STATE == "lost"){
-    context.font = "30px Courier"
-    context.fillStyle = "black"
-    context.fillText(SCORE, 8, 30)
   }
 }
 

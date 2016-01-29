@@ -7,7 +7,6 @@ var GAME_STATE
 var CANVAS
 var VIEWPORT_X
 var currentObstacle
-var HIGH_SCORE = 0
 
 
 /**** Settings ****/

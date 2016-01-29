@@ -3,7 +3,6 @@ function loadGame(){
   window.addEventListener("keypress", keyPressed, false)
   CANVAS = document.getElementById("game-screen")
   fixCanvas()
-  HIGH_SCORES = [ 15, 10, 5 ]
   resetGame()
 }
 
@@ -19,7 +18,6 @@ function startGame(){
 function resetGame(){
   window.clearInterval(GAME_LOOP)
   GAME_STATE = "loaded"
-  SCORE = 0
   PLAYER = new Player()
   KEY_QUEUE = []
   VIEWPORT_X = 0
@@ -53,12 +51,6 @@ function loseGame(){
   window.clearInterval(GAME_LOOP)
   draw(CANVAS)
   console.log("ending game")
-
-  HIGH_SCORES.push(SCORE)
-  HIGH_SCORES.sort(REVERSE_NUMERICAL)
-  if (HIGH_SCORES.length > 5) {
-    HIGH_SCORES.pop()
-  }
 }
 
 loadImages(function(n) { console.info(n) }, loadGame)
