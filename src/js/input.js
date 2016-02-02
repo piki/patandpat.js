@@ -3,11 +3,12 @@
 
 //Called when the space key is pressed
 function spaceKeyPressed(){
+jump()
 }
 
 //Called when the enter key is pressed
 function enterKeyPressed(){
-  starGame()
+  startGame()
 }
 
 //Called when the r key is pressed
