@@ -1,5 +1,6 @@
 /**** Game Status Functions ****/
 function loadGame(){
+  HIGH_SCORE = 0
   window.addEventListener("keypress", keyPressed, false)
   CANVAS = document.getElementById("game-screen")
   fixCanvas()
@@ -13,6 +14,7 @@ function startGame(){
   KEY_QUEUE = []
   GAME_LOOP = window.setInterval(gameTick, 1000/FPS)
   console.log("game started")
+  SCORE = 0
 }
 
 function resetGame(){
@@ -51,6 +53,10 @@ function loseGame(){
   window.clearInterval(GAME_LOOP)
   draw(CANVAS)
   console.log("ending game")
+  
+  if(SCORE > HIGH_SCORE){
+    HIGH_SCORE = SCORE
+  }
 }
 
 loadImages(function(n) { console.info(n) }, loadGame)
