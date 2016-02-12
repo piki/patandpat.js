@@ -53,6 +53,10 @@ function draw(canvas){
     context.fillStyle = "dimgray"
     context.fillText("Press Enter to Start", 109, 92)
   }
+
+  context.font = "20px Arial"
+  context.fillStyle = "dimgray"
+  context.fillText(SCORE, 10, 30)
 }
 
 
