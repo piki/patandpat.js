@@ -34,7 +34,7 @@ function updateGame(canvas){
   }
 
   if(passedOver(PLAYER, currentObstacle)){
-  	SCORE = SCORE + 1
+    SCORE = SCORE + 1
   }
 
   //Update player's x  position based on FPS

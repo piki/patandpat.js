@@ -53,7 +53,7 @@ function loseGame(){
   window.clearInterval(GAME_LOOP)
   draw(CANVAS)
   console.log("ending game")
-  
+
   if(SCORE > HIGH_SCORE){
     HIGH_SCORE = SCORE
   }

@@ -81,7 +81,7 @@ function jump(){
   if(PLAYER.y == 0)
     PLAYER.yVelocity = PLAYER_JUMP
 }
- 
+
 var REVERSE_NUMERICAL = function(a, b) { return b - a }
 
 function loadScores(){
