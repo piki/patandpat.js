@@ -8,6 +8,9 @@ var CANVAS
 var VIEWPORT_X
 var currentObstacle
 var HIGH_SCORE = 0
+var TREE_X = 4
+var TREE_SIZE = 120
+var TREE_SPACING = 150
 
 
 /**** Settings ****/
@@ -34,6 +37,8 @@ var IMAGES = {
   playerWalking6: { src: "images/player-walking-6.png"},
   playerJumping:  { src: "images/player-jumping.png"},
   coin:           { src: "images/coin.png"},
+  hills:          { src: "images/hills.png"},
+  tree:           { src: "images/tree.png"},
 }
 var WALK_CYCLE = [
   IMAGES.playerWalking1,

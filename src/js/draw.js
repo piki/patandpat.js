@@ -1,12 +1,11 @@
 function draw(canvas){
   var context = canvas.getContext("2d")
   //draw background
-  context.beginPath()
-  context.fillStyle = SCREEN_BACKGROUND
-  context.fillRect(0, 0, canvas.width, canvas.height)
-  context.closePath()
-
-
+  context.drawImage(IMAGES.hills.data, 0, 0, canvas.width, canvas.height)
+  
+  for (var x = TREE_X; x < canvas.width; x += TREE_SPACING) {
+    context.drawImage(IMAGES.tree.data, x, canvas.height-TREE_SIZE, TREE_SIZE, TREE_SIZE)
+  }
 
   //draw player
   var playerImage

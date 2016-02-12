@@ -41,6 +41,11 @@ function updateGame(canvas){
   //Update player's x  position based on FPS
   PLAYER.x += PLAYER_SPEED / FPS
   VIEWPORT_X += PLAYER_SPEED / FPS
+  
+  TREE_X -= PLAYER_SPEED / FPS / 2
+  if (TREE_X < -TREE_SIZE) {
+  	TREE_X += TREE_SPACING
+  }
 
   //calculate the player's new y position and velocity
   PLAYER.y += PLAYER.yVelocity / FPS
