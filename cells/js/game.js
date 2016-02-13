@@ -24,10 +24,16 @@ function startGame(){
 function resetGame(){
   window.clearInterval(GAME_LOOP)
   GAME_STATE = "loaded"
-  PLAYER = new Player(Math.random()*WORLD_W, Math.random()*WORLD_H, "red")
+  PLAYER = new Player("piki", Math.random()*WORLD_W, Math.random()*WORLD_H, "red")
   FOOD = []
   for (var i=0; i<FOOD_COUNT; i++) {
-    FOOD.push(new Food(Math.random()*WORLD_W, Math.random()*WORLD_H, "green"))
+    FOOD.push(new Food())
+  }
+  AI = []
+  for (var i=0; i<AI_NAMES.length; i++) {
+    var ai = new Player(AI_NAMES[i], Math.random()*WORLD_W, Math.random()*WORLD_H, "purple") 
+    ai.reset()
+    AI.push(ai)
   }
   KEY_QUEUE = []
   draw(CANVAS)

@@ -22,30 +22,88 @@ function handleKeys(){
   }
 }
 
+function moveBall(ball, adjustment) {
+  var speed = PLAYER_SPEED / Math.sqrt(ball.radius) * adjustment
+  var requestedSpeed = Math.sqrt(ball.vx*ball.vx + ball.vy*ball.vy)
+  var vx = ball.vx * speed / requestedSpeed
+  var vy = ball.vy * speed / requestedSpeed
+  ball.x += vx
+  if (ball.x < ball.radius) ball.x = ball.radius
+  if (ball.x > WORLD_W - ball.radius) ball.x = WORLD_W - ball.radius
+  ball.y += vy
+  if (ball.y < ball.radius) ball.y = ball.radius
+  if (ball.y > WORLD_H - ball.radius) ball.y = WORLD_H - ball.radius
+}
+
 function updateGame(canvas){
+  // move player
   if (PLAYER.vx != 0 || PLAYER.vy != 0) {
-    var speed = PLAYER_SPEED / Math.sqrt(PLAYER.radius)
-    var requestedSpeed = Math.sqrt(PLAYER.vx*PLAYER.vx + PLAYER.vy*PLAYER.vy)
-    var vx = PLAYER.vx * speed / requestedSpeed
-    var vy = PLAYER.vy * speed / requestedSpeed
-    PLAYER.x += vx
-    if (PLAYER.x < PLAYER.radius) PLAYER.x = PLAYER.radius
-    if (PLAYER.x > WORLD_W - PLAYER.radius) PLAYER.x = WORLD_W - PLAYER.radius
-    PLAYER.y += vy
-    if (PLAYER.y < PLAYER.radius) PLAYER.y = PLAYER.radius
-    if (PLAYER.y > WORLD_H - PLAYER.radius) PLAYER.y = WORLD_H - PLAYER.radius
+    moveBall(PLAYER, 1.0)
   }
 
+  // move the AIs
+  for (var i=0; i<AI.length; i++) {
+    var closest = findClosest(AI[i], FOOD, null)
+    closest = findClosest(AI[i], AI, closest)
+    closest = findClosest(AI[i], [PLAYER], closest)
+    if (closest != null) {
+      AI[i].vx = closest.x - AI[i].x
+      AI[i].vy = closest.y - AI[i].y
+      moveBall(AI[i], 0.5)
+    }
+    else {
+      AI[i].vx = AI[i].vy = 0
+    }
+  }
+
+  // player vs food
   var radsq = PLAYER.radius * PLAYER.radius
   for (var i=0; i<FOOD.length; i++) {
     var dx = PLAYER.x - FOOD[i].x
     var dy = PLAYER.y - FOOD[i].y
     if (dx*dx + dy*dy < radsq) {
+      radsq += FOOD_RADIUS * FOOD_RADIUS
+      PLAYER.radius = Math.sqrt(radsq)
       FOOD[i].reset()
+    }
+  }
 
-      var area = radsq
-      area += FOOD_RADIUS * FOOD_RADIUS
-      PLAYER.radius = Math.sqrt(area)
+  for (var i=0; i<AI.length; i++) {
+    var airadsq = AI[i].radius * AI[i].radius
+    // AI vs food
+    for (var j=0; j<FOOD.length; j++) {
+      var dx = AI[i].x - FOOD[j].x
+      var dy = AI[i].y - FOOD[j].y
+      if (dx*dx + dy*dy < airadsq) {
+        airadsq += FOOD_RADIUS * FOOD_RADIUS
+        AI[i].radius = Math.sqrt(airadsq)
+        FOOD[j].reset()
+      }
+    }
+
+    // AI vs AI
+    for (var j=0; j<AI.length; j++) {
+      if (i == j || AI[i].radius < AI[j].radius) continue;
+      var dx = AI[i].x - AI[j].x
+      var dy = AI[i].y - AI[j].y
+      if (dx*dx + dy*dy < airadsq) {
+        airadsq += AI[j].radius * AI[j].radius
+        AI[i].radius = Math.sqrt(airadsq)
+        AI[j].reset()
+      }
+    }
+
+    // player vs AI
+    var dx = PLAYER.x - AI[i].x
+    var dy = PLAYER.y - AI[i].y
+    var dsq = dx*dx + dy*dy
+    if (PLAYER.radius > AI[i].radius && dsq < radsq) {
+      radsq += AI[i].radius * AI[i].radius
+      PLAYER.radius = Math.sqrt(radsq)
+      AI[i].reset()
+    }
+    else if (PLAYER.radius <= AI[i].radius && dsq < AI[i].radius * AI[i].radius) {
+      loseGame()
     }
   }
 }

@@ -25,24 +25,47 @@ function draw(canvas){
     context.stroke()
   }
 
-  context.strokeStyle = "black"
-  context.fillStyle = PLAYER.color
-  context.beginPath()
-  context.arc(PLAYER.x-viewport_x, PLAYER.y-viewport_y, PLAYER.radius, 0, 2*Math.PI)
-  context.fill()
-  context.stroke()
-  context.font = "15px Arial"
-  context.fillStyle = "white"
-  var str = "piki"
-  var dimensions = context.measureText(str)
-  context.fillText(str, PLAYER.x - dimensions.width/2 - viewport_x, PLAYER.y - viewport_y)
-  str = "" + Math.floor(PLAYER.radius)
-  dimensions = context.measureText(str)
-  context.fillText(str, PLAYER.x - dimensions.width/2 - viewport_x, PLAYER.y + 15 - viewport_y)
+  drawBall(context, viewport_x, viewport_y, PLAYER)
+  for (var i=0; i<AI.length; i++) {
+    drawBall(context, viewport_x, viewport_y, AI[i])
+  }
+
+  var closest = findClosest(PLAYER, AI, null)
+  if (closest != null) {
+    var dx = closest.x - PLAYER.x
+    var dy = closest.y - PLAYER.y
+    var dist = Math.sqrt(dx*dx + dy*dy)
+    var x1 = PLAYER.x + dx * (PLAYER.radius+10)/dist
+    var y1 = PLAYER.y + dy * (PLAYER.radius+10)/dist
+    var x2 = PLAYER.x + dx * (PLAYER.radius+20)/dist
+    var y2 = PLAYER.y + dy * (PLAYER.radius+20)/dist
+    context.beginPath()
+    context.moveTo(x1 - viewport_x, y1 - viewport_y)
+    context.lineTo(x2 - viewport_x, y2 - viewport_y)
+    context.stroke()
+  }
 
   if (GAME_STATE == "loaded") {
     context.font = "20px Arial"
     context.fillStyle = "dimgray"
     context.fillText("Press space to Start", CANVAS.width/2-100, CANVAS.height/2)
   }
+}
+
+function drawBall(context, viewport_x, viewport_y, ball) {
+  context.strokeStyle = "black"
+  context.fillStyle = ball.color
+  context.beginPath()
+  context.arc(ball.x-viewport_x, ball.y-viewport_y, ball.radius, 0, 2*Math.PI)
+  context.fill()
+  context.stroke()
+  var fontSize = Math.floor(ball.radius/2)
+  context.font = "" + fontSize + "px Arial"
+  context.fillStyle = "white"
+  var str = ball.name
+  var dimensions = context.measureText(str)
+  context.fillText(str, ball.x - dimensions.width/2 - viewport_x, ball.y - viewport_y)
+  str = "" + Math.floor(ball.radius)
+  dimensions = context.measureText(str)
+  context.fillText(str, ball.x - dimensions.width/2 - viewport_x, ball.y + fontSize - viewport_y)
 }
