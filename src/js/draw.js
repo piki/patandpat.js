@@ -52,6 +52,10 @@ function draw(canvas){
     context.font = "20px Arial"
     context.fillStyle = "dimgray"
     context.fillText("Press Enter to Start", 109, 92)
+    
+    context.font = "20px Arial"
+    context.fillStyle = "dimgray"
+    context.fillText(HIGH_SCORES, 200, 30)
   }
 
   context.font = "20px Arial"
