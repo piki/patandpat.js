@@ -1,6 +1,17 @@
 function draw(canvas){
   var context = canvas.getContext("2d")
 
+  //draw background
+  context.fillStyle = BG_COLOR
+  context.fillRect(0, 0, canvas.width, canvas.height)
+
+  if (!netReady()) {
+    context.font = "20px Arial"
+    context.fillStyle = "dimgray"
+    context.fillText("Connecting to server", CANVAS.width/2-100, CANVAS.height/2)
+    return
+  }
+
   var viewport_x = PLAYER.x - CANVAS.width/2
   var viewport_y = PLAYER.y - CANVAS.height/2
   if (viewport_x < 0)
@@ -11,10 +22,6 @@ function draw(canvas){
     viewport_y = 0
   if (viewport_y > WORLD_H - CANVAS.height)
     viewport_y = WORLD_H - CANVAS.height
-
-  //draw background
-  context.fillStyle = BG_COLOR
-  context.fillRect(0, 0, canvas.width, canvas.height)
 
   for (var i=0; i<FOOD.length; i++) {
     context.strokeStyle = "black"
@@ -43,12 +50,6 @@ function draw(canvas){
     context.moveTo(x1 - viewport_x, y1 - viewport_y)
     context.lineTo(x2 - viewport_x, y2 - viewport_y)
     context.stroke()
-  }
-
-  if (GAME_STATE == "loaded") {
-    context.font = "20px Arial"
-    context.fillStyle = "dimgray"
-    context.fillText("Press space to Start", CANVAS.width/2-100, CANVAS.height/2)
   }
 }
 

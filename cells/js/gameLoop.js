@@ -39,8 +39,13 @@ function updateGame(canvas){
   // move player
   if (PLAYER.vx != 0 || PLAYER.vy != 0) {
     moveBall(PLAYER, 1.0)
+    netSend("p=" + Math.floor(PLAYER.x) + ","
+                 + Math.floor(PLAYER.y) + ","
+                 + Math.floor(PLAYER.vx) + ","
+                 + Math.floor(PLAYER.vy))
   }
 
+/*
   // move the AIs
   for (var i=0; i<AI.length; i++) {
     var closest = findClosest(AI[i], FOOD, null)
@@ -106,4 +111,5 @@ function updateGame(canvas){
       loseGame()
     }
   }
+*/
 }
