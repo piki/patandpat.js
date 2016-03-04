@@ -49,6 +49,21 @@ function makeNewCoin(canvas){
   currentCoin.y = 75 + 75 * Math.random()
 }
 
+
+//Obstacle array for later
+
+// var OBSTACLES = [
+//   new Obstacle(400, 0, 30, 60),
+//   new Obstacle(300, 0, 60, 30),
+//   new Obstacle(350, 0, 40, 40),
+//   new Obstacle(500, 0, 20, 100)
+// ]
+
+function getNextObstacle(index){
+  index = Math.round(OBSTACLES.length * index)
+  return OBSTACLES[index % OBSTACLES.length] 
+}
+
 /**** Event Functions ****/
 
 function keyPressed(event){
@@ -74,6 +89,43 @@ function keyPressed(event){
     }
   }
 }
+
+// Key State Globals
+var LEFT_ARROW_KEY_PRESSED = false
+var RIGHT_ARROW_KEY_PRESSED = false
+
+function leftArrowKeyPressed(){
+  return LEFT_ARROW_KEY_PRESSED
+}
+
+function rightArrowKeyPressed(){
+  return RIGHT_ARROW_KEY_PRESSED
+}
+
+function keyDown(event){
+  //Left Arrow Key
+  if(event.keyCode == 37){
+    LEFT_ARROW_KEY_PRESSED = true
+  }
+
+  //Right Arrow Key
+  if(event.keyCode == 39){
+    RIGHT_ARROW_KEY_PRESSED = true
+  }
+}
+
+function keyUp(event){
+  //Left Arrow Key
+  if(event.keyCode == 37){
+    LEFT_ARROW_KEY_PRESSED = false
+  }
+
+  //Right Arrow Key
+  if(event.keyCode == 39){
+    RIGHT_ARROW_KEY_PRESSED = false
+  }
+}
+
 
 /**** Character Functions ****/
 
