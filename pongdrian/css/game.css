@@ -1,0 +1,10 @@
+#game-screen{
+  display: block;
+  margin: 0 auto;
+  margin-top: 100px;
+  background: #FFFFFF;
+}
+
+body{
+  background: #2f2f2f;
+}
