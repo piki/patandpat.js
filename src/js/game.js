@@ -3,7 +3,7 @@ function loadGame(){
   window.addEventListener("keypress", keyPressed, false)
   CANVAS = document.getElementById("game-screen")
   fixCanvas()
-  HIGH_SCORES = [ 15, 10, 5 ]
+  loadScores()
   resetGame()
 }
 
@@ -59,6 +59,7 @@ function loseGame(){
   if (HIGH_SCORES.length > 5) {
     HIGH_SCORES.pop()
   }
+  saveScores()
 }
 
 loadImages(function(n) { console.info(n) }, loadGame)
