@@ -49,16 +49,16 @@ function draw(canvas){
   //what to say when the game has just been loaded
   if(GAME_STATE == "loaded"){
     context.font = "20px Arial"
-    context.fillStyle = "dimgray"
-    context.fillText("Press Enter to Start", 109, 92)
-    context.fillText("High scores:", 272, 120)
+    context.fillStyle = "black"
+    context.fillText("Press Enter to Start", 59, 92)
+    context.fillText("High scores:", 272, 40)
     for (var i=0; i<HIGH_SCORES.length; i++) {
-      context.fillText(HIGH_SCORES[i], 317, 140+20*i)
+      context.fillText(HIGH_SCORES[i], 317, 60+20*i)
     }
 
     context.font = "32px Arial"
     context.fillStyle = "red"
-    context.fillText("JUMP, RABBIT!", 82, 50)
+    context.fillText("JUMP, RABBIT!", 22, 50)
   }
 
   //draw the score if the game is running
