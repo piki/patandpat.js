@@ -56,6 +56,7 @@ function loseGame(){
   window.clearInterval(GAME_LOOP)
   draw(CANVAS)
   console.log("ending game")
+  crashSound.play()
 
   HIGH_SCORES.push(SCORE)
   HIGH_SCORES.sort(REVERSE_NUMERICAL)

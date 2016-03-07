@@ -51,3 +51,6 @@ var WALK_CYCLE = [
   IMAGES.playerWalking5,
   IMAGES.playerWalking6
 ]
+
+var jumpSound = new Audio("sounds/jump.wav")
+var crashSound = new Audio("sounds/pacman.wav")

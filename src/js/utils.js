@@ -130,8 +130,10 @@ function keyUp(event){
 /**** Character Functions ****/
 
 function jump(){
-  if(PLAYER.y == 0)
+  if(PLAYER.y == 0) {
+    jumpSound.play()
     PLAYER.yVelocity = PLAYER_JUMP
+  }
 }
  
 var REVERSE_NUMERICAL = function(a, b) { return b - a }
