@@ -44,7 +44,7 @@ function updateGame(canvas){
   var dx = PLAYER_SPEED * speedMod / FPS
 
   //See if the player is jumping over an obstacle
-  if(passedOver(PLAYER, currentObstacle)){
+  if(passedOver(PLAYER, currentObstacle, dx)){
     SCORE = SCORE + 1
   }
 
