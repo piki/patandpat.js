@@ -11,6 +11,8 @@ var HIGH_SCORE = 0
 var TREE_X = 4
 var TREE_SIZE = 120
 var TREE_SPACING = 150
+var SPEEDUP_MOD = 1.5
+var SLOWDOWN_MOD = 0.5
 
 
 /**** Settings ****/

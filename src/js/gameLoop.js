@@ -33,16 +33,24 @@ function updateGame(canvas){
     return
   }
 
+  var speedMod = 1.0
+  if (rightArrowKeyPressed()) {
+    speedMod = SPEEDUP_MOD
+  }
+  else if (leftArrowKeyPressed()) {
+    speedMod = SLOWDOWN_MOD
+  }
+
   //See if the player is jumping over an obstacle
   if(passedOver(PLAYER, currentObstacle)){
     SCORE = SCORE + 1
   }
 
   //Update player's x  position based on FPS
-  PLAYER.x += PLAYER_SPEED / FPS
-  VIEWPORT_X += PLAYER_SPEED / FPS
+  PLAYER.x += PLAYER_SPEED * speedMod / FPS
+  VIEWPORT_X += PLAYER_SPEED * speedMod / FPS
   
-  TREE_X -= PLAYER_SPEED / FPS / 2
+  TREE_X -= PLAYER_SPEED * speedMod / FPS / 2
   if (TREE_X < -TREE_SIZE) {
   	TREE_X += TREE_SPACING
   }

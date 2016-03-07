@@ -1,6 +1,8 @@
 /**** Game Status Functions ****/
 function loadGame(){
   window.addEventListener("keypress", keyPressed, false)
+  window.addEventListener("keydown", keyDown, false)
+  window.addEventListener("keyup", keyUp, false)
   CANVAS = document.getElementById("game-screen")
   fixCanvas()
   loadScores()
