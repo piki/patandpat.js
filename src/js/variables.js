@@ -13,6 +13,7 @@ var TREE_SIZE = 120
 var TREE_SPACING = 150
 var SPEEDUP_MOD = 1.5
 var SLOWDOWN_MOD = 0.5
+var SPEEDUP = 1.0
 
 
 /**** Settings ****/

@@ -41,11 +41,12 @@ function updateGame(canvas){
     speedMod = SLOWDOWN_MOD
   }
 
-  var dx = PLAYER_SPEED * speedMod / FPS
+  var dx = PLAYER_SPEED * speedMod / FPS * SPEEDUP
 
   //See if the player is jumping over an obstacle
   if(passedOver(PLAYER, currentObstacle, dx)){
     SCORE = SCORE + 1
+    SPEEDUP = SPEEDUP * 1.1
   }
 
   //Update player's x  position based on FPS
@@ -58,8 +59,8 @@ function updateGame(canvas){
   }
 
   //calculate the player's new y position and velocity
-  PLAYER.y += PLAYER.yVelocity / FPS
-  PLAYER.yVelocity -= GRAVITY / FPS
+  PLAYER.y += PLAYER.yVelocity / FPS * SPEEDUP
+  PLAYER.yVelocity -= GRAVITY / FPS * SPEEDUP
   if (PLAYER.y <= 0) {
     PLAYER.y = 0
     PLAYER.yVelocity = 0
