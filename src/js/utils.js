@@ -52,15 +52,15 @@ function makeNewCoin(canvas){
 
 //Obstacle array for later
 
-// var OBSTACLES = [
-//   new Obstacle(400, 0, 30, 60),
-//   new Obstacle(300, 0, 60, 30),
-//   new Obstacle(350, 0, 40, 40),
-//   new Obstacle(500, 0, 20, 100)
-// ]
+var OBSTACLES = [
+  new Obstacle(400, 0, 30, 60),
+  new Obstacle(300, 0, 60, 30),
+  new Obstacle(350, 0, 40, 40),
+  new Obstacle(500, 0, 20, 100)
+]
 
 function getNextObstacle(index){
-  index = Math.round(OBSTACLES.length * index)
+  index = Math.floor(OBSTACLES.length * index)
   return OBSTACLES[index % OBSTACLES.length] 
 }
 

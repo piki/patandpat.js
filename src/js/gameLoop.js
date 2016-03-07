@@ -71,6 +71,8 @@ function updateGame(canvas){
     PLAYER.walkFrame = 0
 
   //Update Obstacle if it has gone off screen
-  if(currentObstacle.x + currentObstacle.width < VIEWPORT_X)
+  if(currentObstacle.x + currentObstacle.width < VIEWPORT_X) {
+    currentObstacle = getNextObstacle(Math.random())
     currentObstacle.x = PLAYER.x + canvas.width
+  }
 }
