@@ -65,8 +65,8 @@ function updateGame(canvas){
 
   //Select what walking frame we are on
   //Loop back to the start if we're at the end
-  if(PLAYER.walkFrame < FRAMES_PER_SPRITE * WALK_CYCLE.length - 1)
-    PLAYER.walkFrame++
+  if(PLAYER.walkFrame + speedMod < FRAMES_PER_SPRITE * WALK_CYCLE.length - 1)
+    PLAYER.walkFrame += speedMod
   else
     PLAYER.walkFrame = 0
 
